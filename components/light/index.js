@@ -1,11 +1,28 @@
-import lightStore from '../../stores/light';
+import React,{PropTypes,Component} from 'react';
+import {render} from 'react-dom';
+import classnames from 'classnames';
+import './index.less';
 
-let store = lightStore();
+export default class Light extends Component {
 
-let unsubscribe = store.subscribe(()=>
-	console.log(store.getState())
-);
+	render(){
+		let color = this.props.light.color;
+		return(
+			<div className="traffic-light">
+				<span className={classnames('light',color)}/>
+			</div>
+		)
+	}
+}
 
-store.dispatch(changeGreen());
-store.dispatch(changeYellow());
-store.dispatch(changeRed());
+Light.propTypes = {
+	light:PropTypes.object.isRequired
+}
+
+Light.defaultProps = {
+	light:{
+		color:'red',
+		time:'4'
+	}
+}
+
